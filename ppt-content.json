@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Imperative Tests in Go",
+        "description": "These are straightforward tests where you call the function with specific inputs and then use assertions to check if the result matches the expected outcome.",
+        "code": "func TestAdd(t *testing.T) {\n    result := Add(2, 3)\n    if result != 5 {\n        t.Errorf(\"Expected 5, but got %d\", result)\n    }\n}"
+    },
+    {
+        "title": "Table Driven Tests in Go",
+        "description": "These tests utilize a table of input values and expected outputs. A single test function then loops over each table entry and asserts the result for each one. This method is concise and scalable.",
+        "code": "func TestAdd(t *testing.T) {\n    tests := []struct{\n        a, b, want int\n    }{\n        {1, 2, 3},\n        {2, 3, 5},\n        {3, 4, 7},\n    }\n\n    for _, tt := range tests {\n        got := Add(tt.a, tt.b)\n        if got != tt.want {\n            t.Errorf(\"For %d + %d, expected %d but got %d\", tt.a, tt.b, tt.want, got)\n        }\n    }\n}"
+    },
+    {
+        "title": "Key Differences",
+        "points": [
+            "Structure: Imperative tests are linear and manual, where you write out each test case explicitly. Table-driven tests use a structured format where test cases are defined in a table.",
+            "Scalability: Adding more test cases in table-driven tests is as simple as adding more entries to the table, whereas imperative tests require additional lines of code for each new case.",
+            "Readability: While individual imperative tests might be more immediately readable, table-driven tests offer superior clarity and organization when dealing with many test cases."
+        ]
+    },
+    {
+        "title": "When to Use",
+        "points": [
+            "Table Driven Tests: Ideal for functions where multiple inputs can be tested against expected outputs, especially when you have a growing list of test cases. It keeps things concise and organized.",
+            "Imperative Tests: Suitable for scenarios with fewer test cases, or where each test case requires unique setup and tear-down procedures. It can be more straightforward for simple tests without many variations."
+        ]
+    }
+]
